@@ -15,7 +15,7 @@ android {
         instrumentTest.setRoot('tests')
     }
     defaultConfig {
-        applicationId "mx.jesusmartinoza.cigarrettes"
+        applicationId "mx.jesusmartinoza.smokers"
         minSdkVersion 8
         targetSdkVersion 25
     }
@@ -68,7 +68,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'mx.jesusmartinoza.cigarrettes/mx.jesusmartinoza.cigarrettes.AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'mx.jesusmartinoza.smokers/mx.jesusmartinoza.smokers.AndroidLauncher'
 }
 
 // sets up the Android Eclipse project, using the old Ant based build.

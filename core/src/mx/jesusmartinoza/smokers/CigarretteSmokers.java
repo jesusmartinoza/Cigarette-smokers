@@ -1,4 +1,4 @@
-package mx.jesusmartinoza.cigarrettes;
+package mx.jesusmartinoza.smokers;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;

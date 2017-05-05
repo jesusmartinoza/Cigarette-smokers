@@ -1,10 +1,10 @@
-package mx.jesusmartinoza.cigarrettes;
+package mx.jesusmartinoza.smokers;
 
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import mx.jesusmartinoza.cigarrettes.CigarretteSmokers;
+import mx.jesusmartinoza.smokers.CigarretteSmokers;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override

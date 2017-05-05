@@ -1,8 +1,8 @@
-package mx.jesusmartinoza.cigarrettes.desktop;
+package mx.jesusmartinoza.smokers.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import mx.jesusmartinoza.cigarrettes.CigarretteSmokers;
+import mx.jesusmartinoza.smokers.CigarretteSmokers;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
