@@ -39,7 +39,7 @@ public class Smoker extends Sprite implements Runnable {
 		setAnimation();
 
 		// Init thread
-		thread = new Thread(this);
+		thread = new Thread(this, ingredient.toString());
 		thread.start();
 	}
 
@@ -52,11 +52,13 @@ public class Smoker extends Sprite implements Runnable {
 		smoking = true;
 		table.setBusy(true);
 
+		Gdx.app.log("SMOKER", "Person begin smoking");
 		try {
-			thread.sleep(1000);
+			thread.sleep(smokingTime);
 			table.getIngredients().clear();
 			smoking = false;
 			table.setBusy(false);
+			Gdx.app.log("SMOKER", "Person finish smoking");
 		} catch (InterruptedException e) {
 
 		}
@@ -87,12 +89,13 @@ public class Smoker extends Sprite implements Runnable {
 	 * Valid if the smoker has the remaining ingredient.
 	 */
 	private boolean canSmoke() {
-		boolean valid = table.getIngredients().size() > 0;
+		boolean valid = table.getIngredients().size() == 2;
 
 		if(valid)
-			for(Ingredient i : table.getIngredients())
-				if(i.getId() == ingredient.getId())
+			for(Ingredient i : table.getIngredients()) {
+				if(i.getId().equals(ingredient.getId()))
 					valid = false;
+			}
 
 		return valid;
 	}
@@ -103,7 +106,7 @@ public class Smoker extends Sprite implements Runnable {
 
 		if(smoking) {
 			TextureRegion frame = smokeAnimation.getKeyFrame(duration, true);
-			batch.draw(frame, getX() + 25, getY() + 225, 100, 100);
+			batch.draw(frame, getX() + 40, getY() + 225, 100, 100);
 			duration += delta;
 		}
 	}
@@ -127,6 +130,11 @@ public class Smoker extends Sprite implements Runnable {
 	@Override
 	public void run() {
 		while(true) {
+			try {
+				thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			if(!table.isBusy() && canSmoke())
 				smoke();
 		}
