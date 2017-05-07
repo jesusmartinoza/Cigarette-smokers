@@ -1,9 +1,8 @@
 package mx.jesusmartinoza.smokers;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Main class.
  */
-public class CigarretteSmokers extends ApplicationAdapter {
+public class CigarretteSmokers implements Screen {
 
 	private SpriteBatch batch;
 	private Agent agent;
@@ -19,7 +18,7 @@ public class CigarretteSmokers extends ApplicationAdapter {
 	private Table table;
 
 	/**
-	 * Create smokers list using agents ingredients.
+	 * Create smokers list using agent's ingredients.
 	 */
 	private void createSmokers() {
 		smokers = new ArrayList<Smoker>();
@@ -34,7 +33,7 @@ public class CigarretteSmokers extends ApplicationAdapter {
 	}
 
 	@Override
-	public void create () {
+	public void show() {
 		batch = new SpriteBatch();
 		table = new Table();
 		agent = new Agent(table);
@@ -43,23 +42,49 @@ public class CigarretteSmokers extends ApplicationAdapter {
 	}
 
 	@Override
-	public void render () {
+	public void render (float delta) {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
 		agent.draw(batch);
 		for(Smoker s : smokers)
-			s.draw(batch);
-
-		for(Ingredient i : table.getIngredients())
-			i.draw(batch);
+			s.draw(batch, delta);
 
 		// Draw table and every smoker ingredient
 		table.draw(batch);
 		for(Smoker s : smokers)
 			s.drawIngredient(batch);
 
+		if(table.isBusy())
+			for(Ingredient i : table.getIngredients())
+				i.draw(batch);
+
 		batch.end();
+	}
+
+	@Override
+	public void resize(int width, int height) {
+
+	}
+
+	@Override
+	public void pause() {
+
+	}
+
+	@Override
+	public void resume() {
+
+	}
+
+	@Override
+	public void hide() {
+
+	}
+
+	@Override
+	public void dispose() {
+
 	}
 }

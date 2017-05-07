@@ -3,6 +3,7 @@ package mx.jesusmartinoza.smokers.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import mx.jesusmartinoza.smokers.CigarretteSmokers;
+import mx.jesusmartinoza.smokers.Main;
 
 public class DesktopLauncher {
 	public static void main(String[] arg) {
@@ -10,6 +11,6 @@ public class DesktopLauncher {
 		config.title = "Fumadores";
 		config.width = 800;
 		config.height = 480;
-		new LwjglApplication(new CigarretteSmokers(), config);
+		new LwjglApplication(new Main(), config);
 	}
 }

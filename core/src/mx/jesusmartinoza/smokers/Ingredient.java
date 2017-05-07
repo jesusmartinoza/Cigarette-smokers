@@ -36,5 +36,23 @@ public class Ingredient extends Sprite {
 		setTexture(texture);
 		setSize(80, 80);
 	}
+
+	/**
+	 * Copy constructor. Get texture and create new instance.
+	 * @param ingredient
+	 */
+	public Ingredient(Ingredient ingredient) {
+		super(ingredient.getTexture());
+		this.id = ingredient.id;
+
+		setSize(80, 80);
+	}
+
+	/**
+	 * @return ingredient id.
+	 */
+	public IngredientEnum getId() {
+		return id;
+	}
 }
 

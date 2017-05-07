@@ -15,6 +15,7 @@ public class Agent extends Sprite implements Runnable {
 
 	private ArrayList<Ingredient> ingredients;
 	private Table table;
+	private Thread thread;
 
 	/**
 	 * The agent has an infinite supply of all three ingredients.
@@ -29,6 +30,10 @@ public class Agent extends Sprite implements Runnable {
 		ingredients.add(new Ingredient(IngredientEnum.MATCHES));
 
 		setSize(120, 120);
+
+		// Init thread
+		thread = new Thread(this);
+		thread.start();
 	}
 
 	/**
@@ -44,7 +49,7 @@ public class Agent extends Sprite implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			if(table.isEmpty())
+			if(!table.isBusy() && table.isEmpty())
 				putRandomIngredients(2);
 		}
 	}
@@ -61,9 +66,11 @@ public class Agent extends Sprite implements Runnable {
 			Ingredient ing = ingredients.get(
 				MathUtils.random(ingredients.size() - 1));
 
-			if(!tableIng.contains(ing))
+			if(!tableIng.contains(ing)) {
+				ing.setScale(0.8f);
+				ing.setPosition(310 + (i * 80), 110);
 				tableIng.add(ing);
-			else
+			} else
 				i--;
 		}
 	}

@@ -12,10 +12,12 @@ import java.util.ArrayList;
 
 public class Table extends Sprite {
 
-	private ArrayList<Ingredient> ingredients;
+	private static ArrayList<Ingredient> ingredients;
+	private boolean busy;
 
 	/**
 	 * Constructor.
+	 * Init array of ingredients and set sprite's position.
 	 */
 	public Table() {
 		super(new Texture(Gdx.files.internal("table.png")));
@@ -32,9 +34,24 @@ public class Table extends Sprite {
 	}
 
 	/**
+	 * @return busy flag
+	 */
+	public boolean isBusy() {
+		return busy;
+	}
+
+	/**
+	 * @param busy Set flag to true when someone is smoking
+	 */
+	public void setBusy(boolean busy) {
+		this.busy = busy;
+	}
+
+	/**
 	 * @return Shared ingredients
 	 */
 	public ArrayList<Ingredient> getIngredients() {
 		return ingredients;
 	}
+
 }
