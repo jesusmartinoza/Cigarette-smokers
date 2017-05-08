@@ -2,7 +2,7 @@ package mx.jesusmartinoza.smokers.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import mx.jesusmartinoza.smokers.CigarretteSmokers;
+
 import mx.jesusmartinoza.smokers.Main;
 
 public class DesktopLauncher {

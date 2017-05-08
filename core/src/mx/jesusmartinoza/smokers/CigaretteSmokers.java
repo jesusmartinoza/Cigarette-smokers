@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Main class.
  */
-public class CigarretteSmokers implements Screen {
+public class CigaretteSmokers implements Screen {
 
 	private SpriteBatch batch;
 	private Agent agent;
