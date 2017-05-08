@@ -1,5 +1,4 @@
 # Cigarette smokers
-Using threads and libgdx
 ![](https://raw.githubusercontent.com/jesusmartinoza/Cigarette-smokers/master/readme/demo.gif)
 
  - Consider an organization with three smokers and an agent.
