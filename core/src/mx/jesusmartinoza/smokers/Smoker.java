@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -15,12 +16,15 @@ import com.badlogic.gdx.math.MathUtils;
 public class Smoker extends Sprite implements Runnable {
 
 	private Table table;
-	private Ingredient ingredient;
 	private Thread thread;
+	private Ingredient ingredient;
+	private int cigSmoked;
 
 	private Animation<TextureRegion> smokeAnimation;
 	private boolean smoking;
 	private float duration;
+	private static BitmapFont font;
+
 
 	/**
 	 * Set new smoker with one ingredient and image.
@@ -32,11 +36,16 @@ public class Smoker extends Sprite implements Runnable {
 		super(new Texture(Gdx.files.internal(spriteImage)));
 		this.table = table;
 		this.ingredient = new Ingredient(ingredient);
+		font = new BitmapFont(Gdx.files.internal("regular.fnt"));
 		duration = 0;
+		cigSmoked = 0;
 
 		this.ingredient.setScale(0.7f);
 		setSize(170, 340);
 		setAnimation();
+		font.getData().setScale(0.85f);
+
+		Gdx.app.log("SMOKER", "Created smoker with ingredient " + ingredient.getId());
 
 		// Init thread
 		thread = new Thread(this, ingredient.toString());
@@ -48,17 +57,18 @@ public class Smoker extends Sprite implements Runnable {
 	 * and clear table ingredients list when finish
 	 */
 	private void smoke() {
-		int smokingTime = MathUtils.random(3, 8) * 1000; // ms
+		int smokingTime = MathUtils.random(2, 7); // ms
 		smoking = true;
 		table.setBusy(true);
 
-		Gdx.app.log("SMOKER", "Person begin smoking");
+		Gdx.app.log("SMOKER " + ingredient.getId(), "Begin smoking " + smokingTime + " seconds");
 		try {
-			thread.sleep(smokingTime);
+			thread.sleep(smokingTime * 1000);
 			table.getIngredients().clear();
 			smoking = false;
+			cigSmoked++;
 			table.setBusy(false);
-			Gdx.app.log("SMOKER", "Person finish smoking");
+			Gdx.app.log("SMOKER " + ingredient.getId(), "Finish smoking");
 		} catch (InterruptedException e) {
 
 		}
@@ -103,6 +113,9 @@ public class Smoker extends Sprite implements Runnable {
 	@Override
 	public void draw(Batch batch, float delta) {
 		super.draw(batch);
+
+		font.draw(batch, "Smoked: ", getX() + 40, 440);
+		font.draw(batch, String.valueOf(cigSmoked), getX() + 80, 410);
 
 		if(smoking) {
 			TextureRegion frame = smokeAnimation.getKeyFrame(duration, true);

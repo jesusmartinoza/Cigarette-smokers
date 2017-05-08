@@ -3,6 +3,8 @@ package mx.jesusmartinoza.smokers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ public class CigarretteSmokers implements Screen {
 	private Agent agent;
 	private ArrayList<Smoker> smokers;
 	private Table table;
+	private Sprite background;
 
 	/**
 	 * Create smokers list using agent's ingredients.
@@ -38,6 +41,8 @@ public class CigarretteSmokers implements Screen {
 		table = new Table();
 		agent = new Agent(table);
 
+		background = new Sprite(new Texture("background.jpg"));
+
 		createSmokers();
 	}
 
@@ -47,7 +52,8 @@ public class CigarretteSmokers implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
-		agent.draw(batch);
+
+		background.draw(batch);
 		for(Smoker s : smokers)
 			s.draw(batch, delta);
 

@@ -89,6 +89,7 @@ public class Agent implements Runnable {
 				ing.setScale(0.8f);
 				ing.setPosition(310 + (i * 80), 110);
 				tableIng.add(ing);
+				Gdx.app.log("TABLE", ing.getId().toString() + " placed");
 			} else
 				i--;
 		}
