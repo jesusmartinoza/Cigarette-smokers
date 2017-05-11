@@ -1,13 +1,15 @@
 package mx.jesusmartinoza.bees;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
  * Created by jesusmartinez on 08/05/17.
  */
 
-public class Bear implements Runnable {
+public class Bear extends Sprite implements Runnable {
 
 	private HoneyPot honeyPot;
 	private boolean eating;
@@ -19,9 +21,12 @@ public class Bear implements Runnable {
 	 * @param honeyPot Shared honeyPot instance.
 	 */
 	public Bear(HoneyPot honeyPot) {
+		super(new Texture("bear.png"));
 		this.honeyPot = honeyPot;
-
 		thread = new Thread(this);
+
+		setSize(180, 180);
+		setPosition(80, 200);
 		thread.start();
 	}
 
@@ -41,13 +46,14 @@ public class Bear implements Runnable {
 		}
 	}
 
+	/*
 	public void draw(Batch batch) {
 		if(eating) {
 
 		} else { // sleeping
 
 		}
-	}
+	}*/
 
 	@Override
 	public void run() {

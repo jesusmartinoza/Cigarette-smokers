@@ -2,6 +2,8 @@ package mx.jesusmartinoza.smokers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
@@ -11,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public class Ingredient extends Sprite {
 
 	private IngredientEnum id;
+	private static BitmapFont font;
 
 	/**
 	 * Create new ingredient with sprite.
@@ -20,6 +23,9 @@ public class Ingredient extends Sprite {
 		super(new Texture(Gdx.files.internal("ingredients/tobacco.png")));
 		this.id = id;
 		Texture texture;
+		font = new BitmapFont(Gdx.files.internal("regular.fnt"));
+
+		font.getData().setScale(0.85f);
 
 		switch (id) {
 			case TOBACCO:
@@ -35,6 +41,14 @@ public class Ingredient extends Sprite {
 		}
 		setTexture(texture);
 		setSize(80, 80);
+	}
+
+	/**
+	 * Draw sprite and id
+	 */
+	public void drawWithId(Batch batch) {
+		draw(batch);
+		font.draw(batch, id.toString(), getX() + getWidth(), getY() + 40);
 	}
 
 	/**

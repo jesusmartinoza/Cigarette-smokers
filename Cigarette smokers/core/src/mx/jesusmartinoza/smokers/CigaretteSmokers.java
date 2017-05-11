@@ -19,6 +19,7 @@ public class CigaretteSmokers implements Screen {
 	private ArrayList<Smoker> smokers;
 	private Table table;
 	private Sprite background;
+	private ArrayList<Ingredient> ingredients;
 
 	/**
 	 * Create smokers list using agent's ingredients.
@@ -42,6 +43,16 @@ public class CigaretteSmokers implements Screen {
 		agent = new Agent(table);
 
 		background = new Sprite(new Texture("background.jpg"));
+		ingredients = new ArrayList<Ingredient>();
+		ingredients.add(new Ingredient(IngredientEnum.PAPER));
+		ingredients.add(new Ingredient(IngredientEnum.TOBACCO));
+		ingredients.add(new Ingredient(IngredientEnum.MATCHES));
+
+		for(int i = 0; i < ingredients.size(); i++) {
+			Ingredient in = ingredients.get(i);
+			in.setSize(50, 50);
+			in.setPosition(20, 400 - (i*70));
+		}
 
 		createSmokers();
 	}
@@ -65,6 +76,10 @@ public class CigaretteSmokers implements Screen {
 		if(table.isBusy())
 			for(Ingredient i : table.getIngredients())
 				i.draw(batch);
+
+		// Draw left page ingredients
+		for(Ingredient i : ingredients)
+			i.drawWithId(batch);
 
 		batch.end();
 	}
