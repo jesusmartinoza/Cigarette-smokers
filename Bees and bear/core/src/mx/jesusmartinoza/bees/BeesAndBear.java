@@ -58,10 +58,10 @@ public class BeesAndBear implements Screen {
 
 		batch.begin();
 
+		bear.draw(batch);
 		honeyPot.draw(batch);
 		for(Bee b : bees)
 			b.draw(batch, delta);
-		bear.draw(batch);
 
 		batch.end();
 	}

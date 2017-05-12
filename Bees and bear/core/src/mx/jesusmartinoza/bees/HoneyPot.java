@@ -60,7 +60,9 @@ public class HoneyPot extends Sprite {
 	 * @param portion
 	 */
 	public void addPortion(int portion) {
+		busy = true;
 		currentPortions += portion;
+		busy = false;
 	}
 
 	/**
